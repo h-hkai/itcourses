@@ -8,10 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/voiceUpload', [VoiceUploadController::class, 'createForm']);
-Route::post('/voiceUpload', [VoiceUploadController::class, 'voiceUpload'])->name('voiceUpload');
 
-Route::get('/getVoices', [WechatController::class, 'getDatas']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
