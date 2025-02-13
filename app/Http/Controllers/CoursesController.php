@@ -43,10 +43,11 @@ class CoursesController extends Controller
 
       // 更新用户学习次数
       $user = Auth::user();
-      echo $user;
       $query = DB::table('users')->where('id', $user->id)->first();
       $count = $query->count;     
       DB::table('users')->where('id', $user->id)->update(['count' => $count+1]);
+      $daily_count = $query->count;
+      DB::table('users')->where('id', $user->id)->update(['daily_count' => $daily_count+1]);
     }
 
     public function show($id): View

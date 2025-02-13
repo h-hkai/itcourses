@@ -22,13 +22,17 @@
     <p>{{$course->count}}</p>
     @if(Auth::check())
     <b>下载链接：</b>
-      @if(!empty($course->download_links))
-      <br>
-      <button type="button" class="redirectToUrl" data-redirect-url="{{substr($course->download_links, 4, -4)}}">{{substr($course->download_names, 2, -2)}}</button>
-      @if(!empty($course->downcodes))
-      提取码：{{$course->downcodes}}
-      @endif
-      <br>
+      @if(Auth::user()->daily_count < 3 || Auth::user()->level > 0)
+        @if(!empty($course->download_links))
+        <br>
+        <button type="button" class="redirectToUrl" data-redirect-url="{{substr($course->download_links, 4, -4)}}">{{substr($course->download_names, 2, -2)}}</button>
+        @if(!empty($course->downcodes))
+        提取码：{{$course->downcodes}}
+        @endif
+        <br>
+        @endif
+      @else
+      <p><font color="red">今日下载次数已用完，请明天再来！</font></p>
       @endif
     @else
     <p><font color="red">登陆后获取下载链接！</font></p>
